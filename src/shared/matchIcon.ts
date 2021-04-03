@@ -1,7 +1,7 @@
+import dingbatsRegex from './dingbatsRegex'
 import emojiRegex from './emojiRegex'
-import symbolsRegex from './symbolsRegex'
 
 const matchIcon = (url: string = ''): string | undefined =>
-	(url.match(emojiRegex()) ?? url.match(symbolsRegex()) ?? []).shift()
+	(url.match(emojiRegex()) ?? url.match(dingbatsRegex()) ?? []).shift()
 
 export default matchIcon
