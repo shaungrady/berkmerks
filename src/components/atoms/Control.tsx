@@ -23,7 +23,8 @@ const Control: React.FC<Props> = ({
 	}, [isHovered, isConfirming])
 
 	const handleClick = () => {
-		if (confirmWith == null) {
+		if (confirmWith == null || isConfirming) {
+			setIsConfirming(false)
 			onClick()
 		} else {
 			setIsConfirming(true)
@@ -42,9 +43,7 @@ const Control: React.FC<Props> = ({
 			onMouseLeave={() => setIsHovered(false)}
 		>
 			{isConfirming ? (
-				<span className="icon is-small" onClick={onClick}>
-					{confirmWith}
-				</span>
+				<span className="icon is-small">{confirmWith}</span>
 			) : (
 				<span className="icon is-small">{children}</span>
 			)}
