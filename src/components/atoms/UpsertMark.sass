@@ -1,0 +1,29 @@
+@use "~bulma/sass/helpers/color"
+@use "~bulma/sass/utilities/initial-variables"
+@use "~bulma/sass/utilities/derived-variables"
+
+.UpsertMark
+  &
+    position: relative
+
+  &-input
+    background: transparent !important
+    position: relative
+    z-index: 1
+
+  &-linkPreview
+    color: transparent
+    position: absolute
+    top: 0.4rem
+    right: 2.25rem
+    left: 2rem
+    padding: 0.1rem 0.25rem
+    white-space: pre
+    overflow: hidden
+    z-index: 0
+
+    &Link
+      display: inline-block
+      text-decoration-line: underline
+      text-decoration-color: color.$link
+      text-decoration-thickness: 1px

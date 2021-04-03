@@ -1,0 +1,12 @@
+@use "~bulma/sass/helpers/color"
+
+.MarkSet
+  & &
+    transition: border-left 150ms ease-in-out
+    border-left: 1px solid transparent
+    margin-left: -1px
+    &
+      border-left: 1px solid color.$grey-lighter
+
+  &-row
+    position: relative
