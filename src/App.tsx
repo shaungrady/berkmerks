@@ -5,6 +5,10 @@ import { RecoilRoot } from 'recoil'
 import Marks from './components/organism/Marks/Marks'
 
 function App() {
+	const loading = (
+		<progress className="progress is-small is-primary my-6" max="100" />
+	)
+
 	return (
 		<RecoilRoot>
 			<div className="section">
@@ -19,7 +23,7 @@ function App() {
 					</h2>
 				</header>
 				<div className="container">
-					<React.Suspense fallback={<b>Loading…</b>}>
+					<React.Suspense fallback={loading}>
 						<Marks />
 					</React.Suspense>
 				</div>
