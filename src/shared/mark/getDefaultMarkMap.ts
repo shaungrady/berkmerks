@@ -25,13 +25,7 @@ export default function getDefaultMarkMap(): MarkMap {
 		parseStringToMark('Create React App https://create-react-app.dev/')!,
 	].sort(sortMarks)
 
-	const rootMarks = [
-		sg,
-		builtWith,
-		parseStringToMark('ASPCA https://www.aspca.org/')!,
-		parseStringToMark('Humane Society https://www.humanesociety.org/')!,
-		parseStringToMark('World Wildlife Fund https://www.worldwildlife.org/')!,
-	].sort(sortMarks)
+	const rootMarks = [builtWith, sg].sort(sortMarks)
 
 	map.set(rootMarkID, new Set<Mark>(rootMarks))
 	map.set(sg.id, new Set<Mark>(sgMarks))

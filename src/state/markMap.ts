@@ -13,9 +13,9 @@ const localForageEffect = (key: string): AtomEffect<MarkMap> => ({
 }) => {
 	const loadPersisted = async () => {
 		const compressedMap = await localforage.getItem<Uint8Array>(key)
-		if (compressedMap != null) {
-			setSelf(decompressMarkMap(compressedMap))
-		}
+		compressedMap != null
+			? setSelf(decompressMarkMap(compressedMap))
+			: setSelf(getDefaultMarkMap())
 	}
 
 	loadPersisted()
@@ -31,7 +31,7 @@ const localForageEffect = (key: string): AtomEffect<MarkMap> => ({
 
 const markMapState = atom<MarkMap>({
 	key: 'MarkMap',
-	default: getDefaultMarkMap(),
+	default: new Map(),
 	effects_UNSTABLE: [localForageEffect(storageKey)],
 })
 
