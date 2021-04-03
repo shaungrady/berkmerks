@@ -12,7 +12,7 @@ import { useSetRecoilState } from 'recoil'
 
 import createSortedMarkSet from '../../shared/mark/createSortedMarkSet'
 import { Mark } from '../../shared/mark/types/mark'
-import { markSetStateFamily } from '../../state/markSetAtomFamily'
+import { markMapSetState } from '../../state/markMap'
 import Control from '../atoms/Control'
 import ShowMark from '../atoms/ShowMark'
 import UpsertMark from '../atoms/UpsertMark'
@@ -24,7 +24,7 @@ interface Props {
 }
 
 const MarkSetItem: React.FC<Props> = memo(({ mark, parentMarkID }) => {
-	const markSetRecoilState = markSetStateFamily(parentMarkID)
+	const markSetRecoilState = markMapSetState(parentMarkID)
 	const setMarkSet = useSetRecoilState(markSetRecoilState)
 
 	const [isEditing, setIsEditing] = useState(false)

@@ -3,7 +3,7 @@ import './MarkSet.sass'
 import React, { memo } from 'react'
 import { useRecoilValue } from 'recoil'
 
-import { markSetStateFamily } from '../../state/markSetAtomFamily'
+import { markMapSetState } from '../../state/markMap'
 import MarkSetItem from './MarkSetItem'
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
 }
 
 const MarkSet: React.FC<Props> = memo(({ parentMarkID }) => {
-	const markSet = useRecoilValue(markSetStateFamily(parentMarkID))
+	const markSet = useRecoilValue(markMapSetState(parentMarkID))
 
 	return (
 		<ul className="MarkSet">

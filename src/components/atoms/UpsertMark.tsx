@@ -18,7 +18,7 @@ import mapMarkToString from '../../shared/mark/mapMarkToString'
 import { parseStringToMark } from '../../shared/mark/parseStringToMark'
 import matchURL from '../../shared/matchURL'
 import { noop } from '../../shared/noop'
-import { markSetStateFamily } from '../../state/markSetAtomFamily'
+import { markMapSetState } from '../../state/markMap'
 
 // import isEqual from 'lodash.isequal'
 
@@ -55,7 +55,7 @@ const folderActions: ReadonlyArray<Action> = [
 
 const UpsertMark: React.FC<Props> = memo(
 	({ markID, parentMarkID = rootMarkID, onDone = noop }) => {
-		const markSetRecoilState = markSetStateFamily(parentMarkID)
+		const markSetRecoilState = markMapSetState(parentMarkID)
 		const setMarkSet = useSetRecoilState(markSetRecoilState)
 
 		const [inputValue, setInputValue] = useState('')
