@@ -2,6 +2,7 @@
   "name": "berkmerks",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://shaungrady.com/berkmerks",
   "scripts": {
     "start": "PORT=4040 react-app-rewired start",
     "build": "react-app-rewired build",

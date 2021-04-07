@@ -14,7 +14,7 @@ import { Mark } from '../../shared/mark/types/mark'
 import { markStateFamily } from '../../state/marks'
 import Control from '../atoms/Control'
 import ShowMark from '../atoms/ShowMark'
-import UpsertMarkV2 from '../atoms/UpsertMark'
+import UpsertMark from '../atoms/UpsertMark'
 import MarkSet from './MarkSet'
 
 interface Props {
@@ -60,7 +60,7 @@ const MarkSetItem: React.FC<Props> = ({ mark }) => {
 			</div>
 
 			{isEditing && (
-				<UpsertMarkV2
+				<UpsertMark
 					markID={mark.id}
 					parentID={mark.parentID}
 					onDone={() => setIsEditing(false)}
@@ -69,10 +69,7 @@ const MarkSetItem: React.FC<Props> = ({ mark }) => {
 
 			{isCreating && (
 				<div className="ml-5">
-					<UpsertMarkV2
-						parentID={mark.id}
-						onDone={() => setIsCreating(false)}
-					/>
+					<UpsertMark parentID={mark.id} onDone={() => setIsCreating(false)} />
 				</div>
 			)}
 
