@@ -2,12 +2,18 @@ import matchIcon from '../matchIcon'
 import matchURL from '../matchURL'
 import { Mark } from './types/mark'
 
+type partialMark = { name: string; url?: string; icon?: string }
+
 /** Create a Mark with an optional predefined ID. */
-export default function parseStringToMark(
+export default function parseMarkInput(value: string): partialMark | undefined
+export default function parseMarkInput(
 	value: string,
-	id: string = '',
-	parentID: string
-): Mark | undefined {
+	markToUpdate: Mark
+): Mark | undefined
+export default function parseMarkInput(
+	value: string,
+	markToUpdate?: Mark
+): Mark | partialMark | undefined {
 	const string = value.trim()
 	if (!string) {
 		return
@@ -31,5 +37,6 @@ export default function parseStringToMark(
 		name = name.replace(emoji, '').trim()
 	}
 
-	return { id, parentID, name, url, icon }
+	const partialMark = { name, url, icon }
+	return markToUpdate ? { ...markToUpdate, ...partialMark } : partialMark
 }

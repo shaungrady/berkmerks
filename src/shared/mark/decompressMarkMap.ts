@@ -1,9 +1,11 @@
 import { decompressSync, strFromU8 } from 'fflate'
 
-import { ArrayifiedMarkMap, MarkMap } from './types/mark'
+import { Mark, MarkMap } from './types/mark'
 
-export function decompressMarkMap(compressedMarkMap: Uint8Array): MarkMap {
+export default function decompressMarkMap(
+	compressedMarkMap: Uint8Array
+): MarkMap {
 	const stringified = strFromU8(decompressSync(compressedMarkMap))
-	const arrayified: ArrayifiedMarkMap = JSON.parse(stringified)
-	return new Map(arrayified.map(([id, set]) => [id, new Set(set)]))
+	const marks: Mark[] = JSON.parse(stringified)
+	return new Map(marks.map((mark) => [mark.id, mark]))
 }

@@ -13,14 +13,12 @@ function App() {
 		<RecoilRoot>
 			<div className="section">
 				<header className="container">
-					<h1 className="title is-uppercase">Berkmerks</h1>
-					<h2 className="subtitle">
-						Simple
+					<h1 className="title is-uppercase">
 						<span className="icon mx-1">
 							<BsBookmarks role="image" aria-label="bookmarks" />
 						</span>
-						for simple people.
-					</h2>
+						Berkmerks
+					</h1>
 				</header>
 				<div className="container">
 					<React.Suspense fallback={loading}>

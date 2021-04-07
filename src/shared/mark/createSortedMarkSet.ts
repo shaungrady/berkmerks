@@ -1,4 +1,4 @@
-import { sortMarks } from './sortMarks'
+import sortMarks from './sortMarks'
 import { Mark } from './types/mark'
 
 /**

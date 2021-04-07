@@ -1,43 +1,30 @@
 import './MarkSetItem.sass'
 
 import classNames from 'classnames'
-import React, { memo, useCallback, useState } from 'react'
+import React, { memo, useState } from 'react'
 import {
-	BsArrowReturnRight,
-	BsPencil,
-	BsTrash,
+	AiFillEdit,
 	BsXSquareFill,
-} from 'react-icons/bs'
+	CgCornerDownRight,
+	RiDeleteBin6Line,
+} from 'react-icons/all'
 import { useSetRecoilState } from 'recoil'
 
-import createSortedMarkSet from '../../shared/mark/createSortedMarkSet'
 import { Mark } from '../../shared/mark/types/mark'
-import { markMapSetState } from '../../state/markMap'
+import { markStateFamily } from '../../state/marks'
 import Control from '../atoms/Control'
 import ShowMark from '../atoms/ShowMark'
-import UpsertMark from '../atoms/UpsertMark'
+import UpsertMarkV2 from '../atoms/UpsertMark'
 import MarkSet from './MarkSet'
 
 interface Props {
 	mark: Mark
-	parentMarkID: string
 }
 
-const MarkSetItem: React.FC<Props> = memo(({ mark, parentMarkID }) => {
-	const markSetRecoilState = markMapSetState(parentMarkID)
-	const setMarkSet = useSetRecoilState(markSetRecoilState)
-
+const MarkSetItem: React.FC<Props> = ({ mark }) => {
+	const setMark = useSetRecoilState(markStateFamily(mark.id))
 	const [isEditing, setIsEditing] = useState(false)
 	const [isCreating, setIsCreating] = useState(false)
-
-	const handleDelete = useCallback(() => {
-		setMarkSet((oldMarkSet) => {
-			if (oldMarkSet) {
-				oldMarkSet.delete(mark)
-				return createSortedMarkSet(oldMarkSet)
-			}
-		})
-	}, [mark, setMarkSet])
 
 	return (
 		<>
@@ -48,40 +35,42 @@ const MarkSetItem: React.FC<Props> = memo(({ mark, parentMarkID }) => {
 			>
 				<ShowMark mark={mark} />
 
-				<span className="ml-4 MarkSetItem-controls ">
+				<span className="ml-4 MarkSetItem-controls">
+					<Control className="ml-1 is-link" onClick={() => setIsEditing(true)}>
+						<AiFillEdit />
+					</Control>
+
 					<Control
 						className="ml-1 is-success"
 						onClick={() => setIsCreating(true)}
 					>
-						<BsArrowReturnRight />
+						<CgCornerDownRight />
 					</Control>
 
-					<Control className="ml-1 is-link" onClick={() => setIsEditing(true)}>
-						<BsPencil />
-					</Control>
+					<div className="vr" />
 
 					<Control
-						className="ml-1 is-danger"
-						onClick={() => handleDelete()}
+						className="is-danger"
+						onClick={() => setMark(undefined)}
 						confirmWith={<BsXSquareFill />}
 					>
-						<BsTrash />
+						<RiDeleteBin6Line />
 					</Control>
 				</span>
 			</div>
 
 			{isEditing && (
-				<UpsertMark
+				<UpsertMarkV2
 					markID={mark.id}
-					parentMarkID={parentMarkID}
+					parentID={mark.parentID}
 					onDone={() => setIsEditing(false)}
 				/>
 			)}
 
 			{isCreating && (
 				<div className="ml-5">
-					<UpsertMark
-						parentMarkID={mark.id}
+					<UpsertMarkV2
+						parentID={mark.id}
 						onDone={() => setIsCreating(false)}
 					/>
 				</div>
@@ -92,6 +81,8 @@ const MarkSetItem: React.FC<Props> = memo(({ mark, parentMarkID }) => {
 			</div>
 		</>
 	)
-})
+}
 
-export default MarkSetItem
+MarkSetItem.displayName = 'MarkSetItem'
+
+export default memo(MarkSetItem)

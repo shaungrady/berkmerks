@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid'
 
-export function createMarkID(): string {
+export default function createMarkID(): string {
 	return nanoid()
 }
